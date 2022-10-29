@@ -1,10 +1,10 @@
 import { nanoid } from "nanoid";
 import { useState, useRef } from "react";
 import { AddForm } from "./AddNumberForm.styled"
-import { addContact } from "redux/slices";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
+import { addContact } from "redux/operations";
 
 export const AddNumberForm = () => {
     const nameInputId = useRef(nanoid());
@@ -15,7 +15,7 @@ export const AddNumberForm = () => {
 
     const dispatch = useDispatch();
 
-    const contacts = useSelector(state => state.contacts.value);
+    const contacts = useSelector(state => state.contacts.items);
     const chageHendler = (event) => {
         const {value, name} = event.target;
         switch(name){
@@ -42,7 +42,7 @@ export const AddNumberForm = () => {
             clearForm();
             return;
         }
-        dispatch(addContact({name, number, id: nanoid()}));
+        dispatch(addContact({name, phone: number}));
         clearForm();
     }
 
