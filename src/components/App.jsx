@@ -5,12 +5,14 @@ import { FindContactForm } from "./FindContactForm/FindContactForm";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchContacts, deleteContact } from "redux/operations";
 import { useEffect } from "react";
+import { Loader } from "./Loader/Loader";
 
 
 
 export const App = () => {
   const contacts = useSelector(state => state.contacts.items);
   const filter = useSelector(state => state.filter);
+  const isLoading = useSelector(state => state.contacts.isLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,6 +36,7 @@ export const App = () => {
         <FindContactForm/>
         <ContactsList contacts={filteredContacts(contacts)} deleteContact={(id) => {dispatch(deleteContact(id))}}/>
       </Section>
+      <Loader isLoading={isLoading}/>
     </div>
   );
 }
