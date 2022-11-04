@@ -10,16 +10,19 @@ const HeadderStyled = styled.header`
     }
 `
 
-export const Header = () => {
+export const Header = ({token}) => {
     return <HeadderStyled>
         <NavLink to='/'>Головна</NavLink>
-        <div>
-            <NavLink>Увійти</NavLink>
-            <NavLink to='signup'>Зареєструватись</NavLink>
-        </div>
-        <div className="userInfo">
-            <p>userInfo</p>
-            <button>Вийти</button>
-        </div>
+        {!token ? 
+            <div>
+                <NavLink to="login">Увійти</NavLink>
+                <NavLink to='signup'>Зареєструватись</NavLink>
+            </div> :
+            <div className="userInfo">
+                <p>userInfo</p>
+                <button>Вийти</button>
+            </div>
+        }
+        
     </HeadderStyled>
 }

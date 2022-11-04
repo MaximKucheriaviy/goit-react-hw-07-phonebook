@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import { Header } from "./Header/Header";
 import { Main } from "pages/Main";
 import { SignUp } from "pages/SignUp";
+import { LogIn } from "pages/LogIn";
 
 
 
@@ -24,6 +25,7 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Main/>}/>
         <Route path="signup" element={<SignUp/>}/>
+        <Route path="login" element={<LogIn/>}/>
       </Routes>
       <Loader isLoading={isLoading}/>
     </div>

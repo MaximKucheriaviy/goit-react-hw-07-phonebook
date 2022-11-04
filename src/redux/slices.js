@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchContacts, addContact, deleteContact, createNewUser } from "./operations";
+import { fetchContacts, addContact, deleteContact, createNewUser, loginUser } from "./operations";
 
 
 
@@ -60,25 +60,47 @@ export const filterSlice = createSlice({
     }
 })
 
-export const userSlice = createSlice({
-    name: "userInfo",
-    initialState: {
-        mail: "",
+
+function userSliceInit(){
+    const init = {
         token: "",
         isLoading: false,
         error: null,
-    },
+    }
+    const storedToken = localStorage.getItem("userToken");
+    if(storedToken){
+        init.token = JSON.parse(storedToken);
+    }
+    return init;
+}
+
+export const userSlice = createSlice({
+    name: "userToken",
+    initialState: userSliceInit(),
     extraReducers: {
         [createNewUser.pending](state, action){
             state.isLoading = true;
         },
         [createNewUser.fulfilled](state, action){
-            console.log(action.payload);
+            state.token = action.payload.token;
+            localStorage.setItem("userToken", JSON.stringify(action.payload.token));
             state.isLoading = false;
         },
         [createNewUser.rejected](state, action){
             state.isLoading = false;
-            console.log(action.payload);
+            console.log("SIGNUP ERROR", action.payload);
+        },
+        [loginUser.pending](state, action){
+            state.isLoading = true;
+        },
+        [loginUser.fulfilled](state, action){
+            state.isLoading = false;
+            state.token = action.payload.token;
+            localStorage.setItem("userToken", JSON.stringify(action.payload.token));
+        },
+        [loginUser.rejected](state, action){
+            state.isLoading = false;
+            console.log("LOGIN ERROR", action.payload);
         },
     }
 })

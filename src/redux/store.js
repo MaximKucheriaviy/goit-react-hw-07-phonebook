@@ -8,7 +8,7 @@ export const store = configureStore({
     reducer: {
         contacts: contactsSlice.reducer,
         filter:  filterSlice.reducer,
-        userInfo: userSlice.reducer,
+        userToken: userSlice.reducer,
     },
 })
 

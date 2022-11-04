@@ -51,7 +51,21 @@ export const createNewUser = createAsyncThunk("user/createNewUser", async (reqes
             url: `/users/signup`,
             data: reqest,
         });
-        return response;
+        return response.data;
+    }
+    catch(e){
+        return tunkAPI.rejectWithValue(e.message);
+    }
+})
+
+export const loginUser = createAsyncThunk("user/loginUser", async (reqest, tunkAPI) => {
+    try{
+        const response =  await axios({
+            method: "post",
+            url: `/users/login`,
+            data: reqest,
+        });
+        return response.data;
     }
     catch(e){
         return tunkAPI.rejectWithValue(e.message);
