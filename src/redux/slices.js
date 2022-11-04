@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchContacts, addContact, deleteContact } from "./operations";
+import { fetchContacts, addContact, deleteContact, createNewUser } from "./operations";
+
 
 
 export const contactsSlice = createSlice({
@@ -56,6 +57,29 @@ export const filterSlice = createSlice({
         chageFilter: (state, action) => {
             return action.payload;
         }
+    }
+})
+
+export const userSlice = createSlice({
+    name: "userInfo",
+    initialState: {
+        mail: "",
+        token: "",
+        isLoading: false,
+        error: null,
+    },
+    extraReducers: {
+        [createNewUser.pending](state, action){
+            state.isLoading = true;
+        },
+        [createNewUser.fulfilled](state, action){
+            console.log(action.payload);
+            state.isLoading = false;
+        },
+        [createNewUser.rejected](state, action){
+            state.isLoading = false;
+            console.log(action.payload);
+        },
     }
 })
 

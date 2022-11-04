@@ -1,41 +1,30 @@
-import { Section } from "./Section/Section";
-import { AddNumberForm } from "./AddNumberForm/AddNumberForm";
-import { ContactsList } from "./ContactsList/ContactsList";
-import { FindContactForm } from "./FindContactForm/FindContactForm";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchContacts, deleteContact } from "redux/operations";
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Loader } from "./Loader/Loader";
+import { Routes, Route } from "react-router-dom";
+import { Header } from "./Header/Header";
+import { Main } from "pages/Main";
+import { SignUp } from "pages/SignUp";
 
 
 
 export const App = () => {
-  const contacts = useSelector(state => state.contacts.items);
-  const filter = useSelector(state => state.filter);
+
   const isLoading = useSelector(state => state.contacts.isLoading);
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
-
-  const filteredContacts = () => {
-    if(!filter){
-      return contacts;
-    }
-    return contacts.filter(item => item.name.toLowerCase().includes(filter.toLowerCase()));
-  }
+  // const filteredContacts = () => {
+  //   if(!filter){
+  //     return contacts;
+  //   }
+  //   return contacts.filter(item => item.name.toLowerCase().includes(filter.toLowerCase()));
+  // }
 
   return (
     <div>
-      <Section title="Phonebook">
-        <AddNumberForm/>
-      </Section>
-      <Section title="Contacts">
-        <FindContactForm/>
-        <ContactsList contacts={filteredContacts(contacts)} deleteContact={(id) => {dispatch(deleteContact(id))}}/>
-      </Section>
+      <Header/>
+      <Routes>
+        <Route path="/" element={<Main/>}/>
+        <Route path="signup" element={<SignUp/>}/>
+      </Routes>
       <Loader isLoading={isLoading}/>
     </div>
   );
