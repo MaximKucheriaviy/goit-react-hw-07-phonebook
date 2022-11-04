@@ -77,6 +77,12 @@ function userSliceInit(){
 export const userSlice = createSlice({
     name: "userToken",
     initialState: userSliceInit(),
+    reducers:{
+        logOut(state, action){
+            localStorage.removeItem("userToken");
+            state.token = "";
+        }
+    },
     extraReducers: {
         [createNewUser.pending](state, action){
             state.isLoading = true;
@@ -106,3 +112,4 @@ export const userSlice = createSlice({
 })
 
 export const {chageFilter} = filterSlice.actions;
+export const {logOut} = userSlice.actions;

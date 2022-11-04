@@ -10,7 +10,7 @@ const HeadderStyled = styled.header`
     }
 `
 
-export const Header = ({token}) => {
+export const Header = ({token, logOut}) => {
     return <HeadderStyled>
         <NavLink to='/'>Головна</NavLink>
         {!token ? 
@@ -20,7 +20,7 @@ export const Header = ({token}) => {
             </div> :
             <div className="userInfo">
                 <p>userInfo</p>
-                <button>Вийти</button>
+                <button onClick={logOut}>Вийти</button>
             </div>
         }
         

@@ -5,12 +5,21 @@ import { Header } from "./Header/Header";
 import { Main } from "pages/Main";
 import { SignUp } from "pages/SignUp";
 import { LogIn } from "pages/LogIn";
+import { logOut } from "redux/slices";
+import { useDispatch } from "react-redux";
 
 
 
 export const App = () => {
+  const dispatch = useDispatch();
 
   const isLoading = useSelector(state => state.contacts.isLoading);
+  const userLoading = useSelector(state => state.userToken.isLoading);
+  const token = useSelector(state => state.userToken.token);
+
+  const logOutHendler = () => {
+    dispatch(logOut());
+  }
 
   // const filteredContacts = () => {
   //   if(!filter){
@@ -21,13 +30,13 @@ export const App = () => {
 
   return (
     <div>
-      <Header/>
+      <Header token={token} logOut={logOutHendler}/>
       <Routes>
         <Route path="/" element={<Main/>}/>
         <Route path="signup" element={<SignUp/>}/>
         <Route path="login" element={<LogIn/>}/>
       </Routes>
-      <Loader isLoading={isLoading}/>
+      <Loader isLoading={isLoading || userLoading}/>
     </div>
   );
 }
