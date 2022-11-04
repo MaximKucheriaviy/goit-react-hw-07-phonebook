@@ -1,5 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { API } from "service/api";
 import axios from "axios";
+
 
 axios.defaults.baseURL = "https://connections-api.herokuapp.com"
 
@@ -46,12 +48,8 @@ export const deleteContact = createAsyncThunk("contacts/deleteContact", async (i
 
 export const createNewUser = createAsyncThunk("user/createNewUser", async (reqest, tunkAPI) => {
     try{
-        const response =  await axios({
-            method: "post",
-            url: `/users/signup`,
-            data: reqest,
-        });
-        return response.data;
+        const response = await API.signUp(reqest);
+        return response;
     }
     catch(e){
         return tunkAPI.rejectWithValue(e.message);
@@ -60,11 +58,7 @@ export const createNewUser = createAsyncThunk("user/createNewUser", async (reqes
 
 export const loginUser = createAsyncThunk("user/loginUser", async (reqest, tunkAPI) => {
     try{
-        const response =  await axios({
-            method: "post",
-            url: `/users/login`,
-            data: reqest,
-        });
+        const response = await API.loginUser(reqest);
         return response.data;
     }
     catch(e){
