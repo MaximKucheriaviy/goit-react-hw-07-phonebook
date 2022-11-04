@@ -2,6 +2,7 @@ import { nanoid } from "nanoid"
 import { useState } from "react";
 import { createNewUser } from "redux/operations";
 import { useDispatch } from "react-redux";
+import { StyledMain } from "./StyledPages";
 
 export const SignUp = () => {
     const dispatch = useDispatch();
@@ -39,7 +40,8 @@ export const SignUp = () => {
 
 
 
-    return <form onSubmit={submitHendler}>
+    return <StyledMain>
+    <form className="userForm" onSubmit={submitHendler}>
         <label htmlFor={nameID}>Name</label>
         <input 
             type="text" 
@@ -66,4 +68,5 @@ export const SignUp = () => {
         />
         <button type="submit">submit</button>
     </form>
+    </StyledMain> 
 }

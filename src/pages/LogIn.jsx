@@ -2,6 +2,7 @@ import { nanoid } from "nanoid"
 import { useState } from "react";
 import { loginUser } from "redux/operations";
 import { useDispatch } from "react-redux";
+import { StyledMain } from "./StyledPages";
 
 export const LogIn = () => {
     const dispatch = useDispatch();
@@ -34,23 +35,25 @@ export const LogIn = () => {
 
 
 
-    return <form onSubmit={submitHendler}>
-        <label htmlFor={mailID}>E-mail</label>
-        <input 
-            type="mail" 
-            id={mailID} 
-            name="mail"
-            value={mail}
-            onChange={chageHendled}
-        />
-        <label htmlFor={passwordID}>Password</label>
-        <input 
-            type="password" 
-            id={passwordID}
-            name="password"
-            value={password}
-            onChange={chageHendled}
-        />
-        <button type="submit">submit</button>
-    </form>
+    return <StyledMain>
+        <form className="userForm" onSubmit={submitHendler}>
+            <label htmlFor={mailID}>E-mail</label>
+            <input 
+                type="mail" 
+                id={mailID} 
+                name="mail"
+                value={mail}
+                onChange={chageHendled}
+            />
+            <label htmlFor={passwordID}>Password</label>
+            <input 
+                type="password" 
+                id={passwordID}
+                name="password"
+                value={password}
+                onChange={chageHendled}
+            />
+            <button type="submit">Увійти</button>
+        </form>
+    </StyledMain>
 }

@@ -7,6 +7,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-repeat: no-repeat;
+  background: linear-gradient(247.35deg, #A87979 31.39%, rgba(168, 124, 121, 0.892907) 38.44%, rgba(168, 132, 121, 0.622495) 49.2%, rgba(168, 135, 121, 0.491995) 58.45%, rgba(168, 138, 121, 0.395954) 67.7%, rgba(174, 103, 52, 0.308009) 76.9%, rgba(156, 138, 40, 0.185727) 84.94%, rgba(106, 68, 22, 0.0940543) 90.97%, rgba(124, 102, 68, 0) 97.15%);
+  min-height: 100vh;
 }
 
 ul, ol{
