@@ -81,6 +81,9 @@ export const userSlice = createSlice({
         logOut(state, action){
             localStorage.removeItem("userToken");
             state.token = "";
+        },
+        resetError(state, action){
+            state.error = null;
         }
     },
     extraReducers: {
@@ -94,7 +97,16 @@ export const userSlice = createSlice({
         },
         [createNewUser.rejected](state, action){
             state.isLoading = false;
-            console.log("SIGNUP ERROR", action.payload);
+            switch (action.payload){
+                case 400:
+                state.error = "Веденно неправильний e-mail або пароль"    
+            break;
+                case 500:
+                state.error = "Помилка серверу"    
+            break;
+            default:
+                state.error = "Невыдома помилка"
+            }
         },
         [loginUser.pending](state, action){
             state.isLoading = true;
@@ -106,10 +118,19 @@ export const userSlice = createSlice({
         },
         [loginUser.rejected](state, action){
             state.isLoading = false;
-            console.log("LOGIN ERROR", action.payload);
+            switch (action.payload){
+                case 400:
+                state.error = "Веденно неправильний e-mail або пароль"    
+            break;
+                case 500:
+                state.error = "Помилка серверу"    
+            break;
+            default:
+                state.error = "Невыдома помилка"
+            } 
         },
     }
 })
 
 export const {chageFilter} = filterSlice.actions;
-export const {logOut} = userSlice.actions;
+export const {logOut, resetError} = userSlice.actions;

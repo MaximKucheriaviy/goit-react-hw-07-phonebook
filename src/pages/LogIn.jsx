@@ -1,17 +1,23 @@
 import { nanoid } from "nanoid"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { loginUser } from "redux/operations";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { StyledMain } from "./StyledPages";
+import { resetError } from "redux/slices";
 
 export const LogIn = () => {
     const dispatch = useDispatch();
+    const error = useSelector(state => state.userToken.error);
 
     const mailID = nanoid();
     const passwordID = nanoid();
 
     const [mail, setMail] = useState("");
     const [password, setPassword] = useState("");
+
+    useEffect(() => {
+        dispatch(resetError());
+    }, [dispatch]);
 
     const chageHendled = (event) => {
         const name = event.target.name;
@@ -53,6 +59,7 @@ export const LogIn = () => {
                 value={password}
                 onChange={chageHendled}
             />
+            <p className="errorMesage">{error}</p>
             <button type="submit">Увійти</button>
         </form>
     </StyledMain>

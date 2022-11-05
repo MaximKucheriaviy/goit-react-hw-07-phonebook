@@ -31,9 +31,7 @@ export const StyledMain = styled.main`
             text-align: center;
         }
         & button{
-            width: 209px;
-            height: 62px;
-            margin-top: 62px;
+            padding: 16px 32px;
             display: block;
             margin-left: auto;
             margin-right: auto;
@@ -51,6 +49,20 @@ export const StyledMain = styled.main`
             text-align: center;
 
             color: #F5F5F5;
+        }
+
+        & .errorMesage{
+            height: 18px;
+            margin-top: 22px;
+            margin-bottom: 22px;
+
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 18px;
+            text-align: center;
+            color: #FF0707;
         }
     }
 `

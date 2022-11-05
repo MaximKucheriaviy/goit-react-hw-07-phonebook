@@ -52,7 +52,7 @@ export const createNewUser = createAsyncThunk("user/createNewUser", async (reqes
         return response;
     }
     catch(e){
-        return tunkAPI.rejectWithValue(e.message);
+        return tunkAPI.rejectWithValue(e);
     }
 })
 
@@ -62,6 +62,6 @@ export const loginUser = createAsyncThunk("user/loginUser", async (reqest, tunkA
         return response.data;
     }
     catch(e){
-        return tunkAPI.rejectWithValue(e.message);
+        return tunkAPI.rejectWithValue(e.response.status);
     }
 })

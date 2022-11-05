@@ -1,11 +1,13 @@
 import { nanoid } from "nanoid"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createNewUser } from "redux/operations";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { StyledMain } from "./StyledPages";
+import { resetError } from "redux/slices";
 
 export const SignUp = () => {
     const dispatch = useDispatch();
+    const error = useSelector(state => state.userToken.error);
 
     const nameID = nanoid();
     const mailID = nanoid();
@@ -14,6 +16,11 @@ export const SignUp = () => {
     const [name, setName] = useState("");
     const [mail, setMail] = useState("");
     const [password, setPassword] = useState("");
+
+    useEffect(() => {
+        dispatch(resetError());
+    }, [dispatch]);
+
 
     const chageHendled = (event) => {
         const name = event.target.name;
@@ -66,7 +73,8 @@ export const SignUp = () => {
             value={password}
             onChange={chageHendled}
         />
-        <button type="submit">submit</button>
+        <p className="errorMesage">{error}</p>
+        <button type="submit">Зареєструватись</button>
     </form>
     </StyledMain> 
 }
