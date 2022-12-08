@@ -3,14 +3,15 @@ import PropTypes from "prop-types";
 
 
 export const ContactsList = ({contacts, deleteContact}) => {
+  console.log(contacts);
   return(
     <ContactList>
       {contacts.map(item => {
         return(
-          <li key={item.id}>
+          <li key={item._id}>
             <span>{item.name}:</span> 
             <span>{item.phone}</span> 
-            <button onClick={() => {deleteContact(item.id)}}>delete</button>
+            <button onClick={() => {deleteContact(item._id)}}>delete</button>
           </li>
         )
       })}
@@ -20,7 +21,7 @@ export const ContactsList = ({contacts, deleteContact}) => {
 
 ContactsList.propTypes = {
   contacts: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
     name: PropTypes.string,
     number: PropTypes.string,
   }))
